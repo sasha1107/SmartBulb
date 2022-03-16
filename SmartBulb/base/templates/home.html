@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Diary Home{% endblock%}</title>
+</head>
+<body>
+    {% block content %}
+    {% if validity == 0 %}
+    <a href="{% url 'login' %}">로그인</a><br>
+    <a href="{% url 'signup' %}">회원가입</a><br>
+    {% else %}
+    <a href="{% url 'logout' %}">로그아웃</a><br>
+    <a href="{% url 'save_diary' %}">일기 작성</a>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

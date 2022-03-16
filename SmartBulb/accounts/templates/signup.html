@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1>회원가입</h1>
+
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        아이디:
+        <input name="username" type="text">
+        <br>
+        비밀번호:
+        <input name="password1" type="password">
+        <br>
+        비밀번호 확인:
+        <input name="password2" type="password">
+        <br><br>
+        <input type="submit" class="btn btn-primary" value="제출">
+
+        {% if validity == 0 %}
+        <script type="text/javascript">
+            alert("입력한 비밀번호가 동일하지 않습니다.");
+            </script>
+            <script type="text/javascript">
+            location.href="{% url 'signup' %}";
+            </script>
+        {% endif %}
+
+        {% if registered == 1 %}
+           <script type="text/javascript">
+           alert("이미 등록된 회원입니다.");
+           </script>
+           <script type="text/javascript">
+           location.href="{% url 'signup' %}";
+           </script>
+        {% endif %}
+
+        {% if filled == 0 %}
+           <script type="text/javascript">
+           alert("모든 칸을 채워야 합니다.");
+           </script>
+           <script type="text/javascript">
+           location.href="{% url 'signup' %}";
+           </script>
+        {% endif %}
+
+
+    </form>
+</div>
+
+{% endblock %}
