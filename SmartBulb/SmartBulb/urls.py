@@ -17,17 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.urls import include
-import accounts.views
 import base.views
 import diary.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base.views.home, name='home'),
-    path('signup/', accounts.views.signup, name='signup'),
-    path('login/', accounts.views.login, name='login'),
-    path('logout/', accounts.views.logout, name='logout'),
-    path('save_diary/', diary.views.save_diary, name='save_diary'),
+    path('db/', diary.views.init_db, name='db'),
+    path('accounts/', include('accounts.urls')),
+    path('diary/', include('diary.urls')),
 ]
 
 if settings.DEBUG:
