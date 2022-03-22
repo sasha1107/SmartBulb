@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      {{form.as_table}}
+    </table>
+    <br>
+    <input class="btn btn dark" type="submit" value="저장">
+  </form>
+
+  <a href="{% url 'home' %}">돌아가기</a><br>
+</div>
+
+
+{% endblock %}
