@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Diary</title>
-</head>
-<body>
-  <form action="">
-      <h4>제목: </h4>
-      <input type="text" name="title" required>
-      <br><br>
-      <h4>본문: </h4>
-      <textarea name="diarytext" id="" cols="40" rows="10" required></textarea>
-      <br>
-      <input class="btn btn dark" type="submit" value="저장">
-  </form>
-</body>
-</html>
+{% extends 'home.html' %}
+
+{% block content %}
+<h4>제목: </h4>
+<p>{{diary.title}}</p>
+<h4>본문: </h4>
+<p>{{diary.text}}</p>
+
+<a href="{% url 'home' %}">돌아가기</a><br>
+
+{% endblock %}

@@ -24,7 +24,7 @@ def login(request):
 def signup(request):
     if request.method == "POST":
         try:
-            if CustomUser.objects.filter(username = request.POST['username']).exists():
+            if CustomUser.objects.filter(username=request.POST['username']).exists():
                 return render(request, "signup.html", {"registered": 1, "validity": 1, "filled": 1})
             elif request.POST["password1"] == request.POST["password2"]:
                 user = CustomUser.objects.create_user(

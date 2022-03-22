@@ -11,8 +11,8 @@
     <a href="{% url 'signup' %}">회원가입</a><br>
     {% else %}
     <a href="{% url 'logout' %}">로그아웃</a><br>
-    <a href="{% url 'save_diary' %}">일기 작성</a>
     {% endif %}
+    <a href="{% url 'main_diary' %}">일기</a>
     {% endblock %}
 </body>
 </html>
