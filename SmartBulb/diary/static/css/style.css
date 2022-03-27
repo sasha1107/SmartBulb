@@ -88,7 +88,7 @@ body {
 }
 
 .other {
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .today {
@@ -108,4 +108,10 @@ body {
   background-color: #FF0000;
   border-radius: 50%;
   content: '';
+}
+
+a {
+  text-align: center;
+  /*text-decoration: none;  링크의 밑줄 제거 */
+  color: inherit; /* 링크의 색상 제거 */
 }

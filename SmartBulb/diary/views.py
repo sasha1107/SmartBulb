@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+import datetime
 from pathlib import Path
 from accounts.models import CustomUser
 from .models import Sentiment, Diary
@@ -37,26 +38,39 @@ def main_diary(request):
     if not request.user.is_authenticated:
         return render(request, "main_diary.html", {"validity": 0})
 
-    diary = Diary.objects.filter(user=request.user.id)
-
-    return render(request, "main_diary.html", {'diaries': diary})
+    return render(request, "main_diary.html")
 
 
 @login_required
-def save_diary(request):
+def save_diary(request, year, month, day):
+    diaries = Diary.objects.filter(user=request.user.id)
     user = CustomUser.objects.filter(username=str(request.user))
+    date_time_str = str(year) + '-' + str(month) + '-' + str(day)
+    date_time_str = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
+
+
+    if diaries is not None:
+        for diary in diaries:
+            i = 0
+            pub_date_converted = str(diary.pub_date)
+            date_time_str = str(date_time_str)
+            date_time_str = date_time_str[:len(pub_date_converted)]
+
+            if pub_date_converted == date_time_str:
+                return redirect("view_diary", str(diary.id))
+
     if request.method == "POST":
         form = DiaryPost(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.user = user[0]
-            post.pub_date = timezone.now()
+            post.pub_date = date_time_str
             post.sentiment = analyze_sentiment(post.text)
             post.save()
             return redirect("view_diary", str(post.id))
     else:
         form = DiaryPost()
-        return render(request, "new.html", {'form': form})
+        return render(request, "new.html", {'form': form, 'year': year, 'month': month, 'day': day})
 
 
 @login_required

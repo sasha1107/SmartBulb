@@ -9,21 +9,14 @@
 
 </head>
 <body>
-{% if validity == 0 %}
-    <script type="text/javascript">
-    alert("로그인이 필요합니다.");
-    </script>
-    <script type="text/javascript">
-    location.href="{% url 'login' %}";
-    </script>
-{% endif %}
-
-
-<a href="{% url 'save_diary' %}">일기 작성</a><br><br>
-
-{% for diary in diaries %}
-<a href="{% url 'view_diary' diary_id=diary.id %}">{{diary.title}}</a><br>
-{% endfor %}
+  {% if validity == 0 %}
+      <script type="text/javascript">
+      alert("로그인이 필요합니다.");
+      </script>
+      <script type="text/javascript">
+      location.href="{% url 'login' %}";
+      </script>
+  {% endif %}
 
   <div class="calendar">
     <div class="header">
@@ -48,6 +41,9 @@
     </div>
   </div>
   <script src="{% static 'js/index.js' %}"></script>
+
+  <br>
+  <a href="{% url 'home' %}">돌아가기</a><br>
 {% endblock %}
 </body>
 </html>
