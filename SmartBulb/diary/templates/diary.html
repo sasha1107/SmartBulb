@@ -7,12 +7,13 @@
     <meta charset="UTF-8">
 </head>
 <body>
+    <h4>날짜: {{diary.pub_date}}</h4>
     <h4>제목: </h4>
     <p>{{diary.title}}</p>
     <h4>본문: </h4>
     <p>{{diary.text}}</p>
 
-    <a href="{% url 'home' %}">돌아가기</a><br>
+    <a href="{% url 'main_diary' %}">돌아가기</a><br>
 
 {% endblock %}
 </body>

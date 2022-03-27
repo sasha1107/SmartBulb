@@ -8,16 +8,20 @@
 </head>
 <body>
   <div class="container">
+    <h4>{{year}}년 {{month}}월 {{day}}일</h4>
     <form method="POST">
       {% csrf_token %}
       <table>
         {{form.as_table}}
       </table>
+
       <br>
       <input class="btn btn dark" type="submit" value="저장">
     </form>
-
-  <a href="{% url 'home' %}">돌아가기</a><br>
+    <p>{{a}}</p>
+    <br>
+    <p>{{b}}</p>
+  <a href="{% url 'main_diary' %}">돌아가기</a><br>
 </div>
 
 
