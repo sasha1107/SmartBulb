@@ -13,6 +13,8 @@
     <h4>본문: </h4>
     <p>{{diary.text}}</p>
 
+    <a href="{% url 'edit_diary' diary_id=diary.id %}"><button type="button" >수정하기</button></a>
+    <a href="{% url 'delete_diary' diary_id=diary.id %}"><button type="button" >삭제하기</button></a><br>
     <a href="{% url 'main_diary' %}">돌아가기</a><br>
 
 {% endblock %}

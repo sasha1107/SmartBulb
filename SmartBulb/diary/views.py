@@ -48,7 +48,6 @@ def save_diary(request, year, month, day):
     date_time_str = str(year) + '-' + str(month) + '-' + str(day)
     date_time_str = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
 
-
     if diaries is not None:
         for diary in diaries:
             i = 0
@@ -74,8 +73,41 @@ def save_diary(request, year, month, day):
 
 
 @login_required
-def view_diary(request, diary_id=1):
+def view_diary(request, diary_id):
     diary = Diary.objects.filter(user=request.user.id)
     diary_text = get_object_or_404(diary, pk=diary_id)
     return render(request, "diary.html", {'diary': diary_text})
+
+
+@login_required
+def delete_diary(request, diary_id):
+    diary = Diary.objects.filter(user=request.user.id)
+    diary_text = get_object_or_404(diary, pk=diary_id)
+    diary_text.delete()
+    return redirect("main_diary")
+
+
+@login_required
+def edit_diary(request, diary_id):
+    diary = Diary.objects.filter(user=request.user.id)
+    diary_text = get_object_or_404(diary, pk=diary_id)
+
+    if request.method == "POST":
+        form = DiaryPost(request.POST)
+        if form.is_valid():
+            diary_text.title = form.cleaned_data['title']
+            diary_text.text = form.cleaned_data['text']
+            diary_text.sentiment = analyze_sentiment(diary_text.text)
+            diary_text.save()
+            return redirect("view_diary", str(diary_text.id))
+    else:
+        form = DiaryPost(instance=diary_text)
+        context = {
+            'form': form,
+            'writing': True,
+            'now': 'edit',
+            'diary': diary_text,
+        }
+        return render(request, "edit.html", context)
+
 
