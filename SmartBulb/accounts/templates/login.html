@@ -19,7 +19,7 @@
             <input name="password" type="password">
             <br><br>
             <input type="submit" class="btn btn-primary" value="로그인">
-            <a href="{% url 'signup' %}">회원가입</a>
+            <a href="{% url 'signup' %}"><button type="button">회원가입</button></a>
             {% if validity == 0 %}
                 <script type="text/javascript">
                 alert("아이디 혹은 비밀번호가 맞지 않습니다.");
