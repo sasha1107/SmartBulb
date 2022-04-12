@@ -5,8 +5,18 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>마이페이지 - 마음반짝이</title>
 
+	<!-- Load fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
+	<!-- Load css styles -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
   {% if validity == 0 %}
@@ -17,33 +27,93 @@
       location.href="{% url 'login' %}";
       </script>
   {% endif %}
-
-  <div class="calendar">
-    <div class="header">
-      <div class="year-month"></div>
-      <div class="nav">
-        <button class="nav-btn go-prev" onclick="prevMonth(); return false;">&lt;</button>
-        <button class="nav-btn go-today" onclick="goToday(); return false;">Today</button>
-        <button class="nav-btn go-next" onclick="nextMonth(); return false;">&gt;</button>
+  <section id="services">
+		<a href="{% url 'home' %}" class="logo">
+			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
+		</a>
+		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
+		<nav class="menu">
+			<a href="#" class="close"><i class="fa fa-close"></i></a>
+			<h3>Menu</h3>
+			<ul class="nav">
+				<li><a data-scroll href="#home">HOME</a></li>
+				<li><a data-scroll href="#services">DIARY</a></li>
+				<li><a data-scroll href="mypage.html">MYPAGE</a></li>
+				<li><a data-scroll href="#contact">LOGOUT</a></li>
+			</ul>
+			<ul class="social-icons">
+				<li><a href=""><i class="fa fa-facebook"></i></a></li>
+				<li><a href=""><i class="fa fa-twitter"></i></a></li>
+				<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+				<li><a href=""><i class="fa fa-behance"></i></a></li>
+				<li><a href=""><i class="fa fa-pinterest"></i></a></li>
+			</ul>
+		</nav>
+	</section>
+  <section id="contact">
+    <div class="container">
+      <div class="calendar" style="margin: 0px auto;">
+        <div class="header">
+          <div class="year-month"></div>
+          <div class="nav">
+            <button class="nav-btn go-prev" onclick="prevMonth(); return false;">&lt;</button>
+            <button class="nav-btn go-today" onclick="goToday(); return false;">Today</button>
+            <button class="nav-btn go-next" onclick="nextMonth(); return false;">&gt;</button>
+          </div>
+        </div>
+        <div class="main">
+          <div class="days">
+            <div class="day">일</div>
+            <div class="day">월</div>
+            <div class="day">화</div>
+            <div class="day">수</div>
+            <div class="day">목</div>
+            <div class="day">금</div>
+            <div class="day">토</div>
+          </div>
+          <div class="dates"></div>
+        </div>
       </div>
     </div>
-    <div class="main">
-      <div class="days">
-        <div class="day">일</div>
-        <div class="day">월</div>
-        <div class="day">화</div>
-        <div class="day">수</div>
-        <div class="day">목</div>
-        <div class="day">금</div>
-        <div class="day">토</div>
-      </div>
-      <div class="dates"></div>
-    </div>
-  </div>
+  </section>
   <script src="{% static 'js/index.js' %}"></script>
-
   <br>
   <a href="{% url 'home' %}">돌아가기</a><br>
+  
+      <!-- Footer start -->
+	<footer>
+		<div class="footer">
+			<div class="row">
+				<!-- <div class="col-md-8"> -->
+					<p>HUFS CD <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">Victory Code</a>
+</p>
+				<!-- </div> -->
+				<!-- <div class="col-md-4">
+					<ul class="social-icons">
+						<li><a href=""><i class="fa fa-facebook"></i></a></li>
+						<li><a href=""><i class="fa fa-twitter"></i></a></li>
+						<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+						<li><a href=""><i class="fa fa-behance"></i></a></li>
+						<li><a href=""><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div> -->
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end  -->
+
+	<!-- Load jQuery -->
+	<script type="text/javascript" src="../../static/js/jquery-1.11.2.min.js"></script>
+
+	<!-- Load Booststrap -->
+	<script type="text/javascript" src="../../static/js/bootstrap.js"></script>
+
+	<script type="text/javascript" src="../../static/js/smooth-scroll.js"></script>
+
+	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
+
+	<!-- Load custom js for theme -->
+	<script type="text/javascript" src="../../static/js/app.js"></script>
 {% endblock %}
 </body>
 </html>
