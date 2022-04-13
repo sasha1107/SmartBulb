@@ -7,18 +7,133 @@ from accounts.models import CustomUser
 from .models import Sentiment, Diary
 from .form import DiaryPost
 import pandas as pd
+from soynlp.normalizer import *
+from hanspell import spell_checker
+import torch
+from torch import nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+import gluonnlp as nlp
+import numpy as np
+from kobert_tokenizer import KoBERTTokenizer
+from transformers import BertModel
+from kobert.utils import get_tokenizer
+from transformers import BertModel
 import os
 
 # Create your views here.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
+batch_size = 64
+max_len = 64
+bModelLoaded = False
 
 
-def analyze_sentiment(text):
-    sentiment = Sentiment.objects.get(id=1)
+class BERTClassifier(nn.Module):
+    def __init__(self,
+                 bert,
+                 hidden_size=768,
+                 num_classes=4,  ##클래스 수 조정##
+                 dr_rate=None,
+                 params=None):
+        super(BERTClassifier, self).__init__()
+        self.bert = bert
+        self.dr_rate = dr_rate
 
-    return sentiment
+        self.classifier = nn.Linear(hidden_size, num_classes)
+        if dr_rate:
+            self.dropout = nn.Dropout(p=dr_rate)
+
+    def gen_attention_mask(self, token_ids, valid_length):
+        attention_mask = torch.zeros_like(token_ids)
+        for i, v in enumerate(valid_length):
+            attention_mask[i][:v] = 1
+        return attention_mask.float()
+
+    def forward(self, token_ids, valid_length, segment_ids):
+        attention_mask = self.gen_attention_mask(token_ids, valid_length)
+
+        _, pooler = self.bert(input_ids=token_ids, token_type_ids=segment_ids.long(),
+                              attention_mask=attention_mask.float().to(token_ids.device))
+        if self.dr_rate:
+            out = self.dropout(pooler)
+        return self.classifier(out)
+
+
+class BERTDataset(Dataset):
+    def __init__(self, dataset, sent_idx, label_idx, bert_tokenizer, max_len,
+                 pad, pair):
+        transform = nlp.data.BERTSentenceTransform(
+            bert_tokenizer, max_seq_length=max_len, pad=pad, pair=pair)
+
+        self.sentences = [transform([i[sent_idx]]) for i in dataset]
+        self.labels = [np.int32(i[label_idx]) for i in dataset]
+
+    def __getitem__(self, i):
+        return (self.sentences[i] + (self.labels[i], ))
+
+    def __len__(self):
+        return (len(self.labels))
+
+
+if not bModelLoaded:
+    tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
+    vocab = nlp.vocab.BERTVocab.from_sentencepiece(tokenizer.vocab_file, padding_token='[PAD]')
+    bertmodel = BertModel.from_pretrained('skt/kobert-base-v1', return_dict=False)
+    tokenizer = get_tokenizer()
+    tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
+    device = torch.device("cuda:0")
+    model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
+    model.load_static_dict(torch.load("model2.pth", map_location=device))
+    bModelLoaded = True
+
+
+def emotion_to_word(sentence):
+    sentence.replace('ㅠㅠ', '우는 얼굴')
+    sentence.replace('ㅜㅜ', '우는 얼굴')
+    sentence.replace('ㅡㅡ', '짜증난 얼굴')
+    sentence.replace('ㅎㅎ', '웃음')
+    sentence.replace('ㅋㅋ', '웃음')
+    sentence.replace('^^', '웃는 얼굴')
+    return sentence
+
+
+def analyze_sentiment(sentence):
+    emotion_norm = emoticon_normalize(sentence, num_repeats=2)
+    emotion_sentence = emotion_to_word(sentence)
+    predict_sentence = spell_checker.check(emotion_sentence).checked
+    data = [predict_sentence, '0']
+    dataset_another = [data]
+
+    another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
+    test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
+
+    model.eval()
+
+    for batch_id, (token_ids, valid_length, segment_ids, label) in enumerate(test_dataloader):
+        token_ids = token_ids.long().to(device)
+        segment_ids = segment_ids.long().to(device)
+
+        valid_length = valid_length
+        label = label.long().to(device)
+        out = model(token_ids, valid_length, segment_ids)
+        test_eval = []
+        for i in out:
+            logits = i
+            logits = logits.detach().cpu().numpy()
+
+            if np.argmax(logits) == 0:
+                test_eval.append("행복")
+            elif np.argmax(logits) == 1:
+                test_eval.append("분노")
+            elif np.argmax(logits) == 2:
+                test_eval.append("슬픔")
+            elif np.argmax(logits) == 3:
+                test_eval.append("중립")
+
+    return test_eval[0]
 
 
 def init_db(request):
