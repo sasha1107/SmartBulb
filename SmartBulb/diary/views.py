@@ -86,7 +86,7 @@ if not bModelLoaded:
     tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
     device = torch.device("cuda:0")
     model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
-    model.load_static_dict(torch.load("model2.pth", map_location=device))
+    model.load_state_dict(torch.load(os.path.join(BASE_DIR, 'diary', 'model2.pth')))
     bModelLoaded = True
 
 
