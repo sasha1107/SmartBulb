@@ -101,6 +101,7 @@ def emotion_to_word(sentence):
 
 
 def analyze_sentiment(sentence):
+    sentiment = Sentiment()
     emotion_norm = emoticon_normalize(sentence, num_repeats=2)
     emotion_sentence = emotion_to_word(sentence)
     predict_sentence = spell_checker.check(emotion_sentence).checked
@@ -108,7 +109,7 @@ def analyze_sentiment(sentence):
     dataset_another = [data]
 
     another_test = BERTDataset(dataset_another, 0, 1, tok, max_len, True, False)
-    test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=5)
+    test_dataloader = torch.utils.data.DataLoader(another_test, batch_size=batch_size, num_workers=0)
 
     model.eval()
 
@@ -133,7 +134,10 @@ def analyze_sentiment(sentence):
             elif np.argmax(logits) == 3:
                 test_eval.append("중립")
 
-    return test_eval[0]
+    sentiment.sentiment = test_eval[0]
+    sentiment.save()
+
+    return sentiment
 
 
 def init_db(request):
