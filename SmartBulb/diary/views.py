@@ -101,7 +101,6 @@ def emotion_to_word(sentence):
 
 
 def analyze_sentiment(sentence):
-    sentiment = Sentiment()
     emotion_norm = emoticon_normalize(sentence, num_repeats=2)
     emotion_sentence = emotion_to_word(sentence)
     predict_sentence = spell_checker.check(emotion_sentence).checked
@@ -134,8 +133,7 @@ def analyze_sentiment(sentence):
             elif np.argmax(logits) == 3:
                 test_eval.append("중립")
 
-    sentiment.sentiment = test_eval[0]
-    sentiment.save()
+    sentiment = Sentiment.objects.get(sentiment=test_eval[0])
 
     return sentiment
 
