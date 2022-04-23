@@ -7,8 +7,8 @@ from accounts.models import CustomUser
 from .models import Sentiment, Diary
 from .form import DiaryPost
 import pandas as pd
-from soynlp.normalizer import *
-from hanspell import spell_checker
+# from soynlp.normalizer import *
+# from hanspell import spell_checker
 import os
 
 # Create your views here.
