@@ -113,3 +113,23 @@ def edit_diary(request, diary_id):
         return render(request, "edit.html", context)
 
 
+def statistics(request, year, month):
+    diaries = Diary.objects.filter(user=request.user.id)
+
+    sentiment_dict = {}
+
+    if not diaries:
+        return render(request, "statistics.html", {'sentiment_dict': 0})
+    else:
+
+        for diary in diaries:
+            try:
+                sentiment_dict[diary.sentiment] += 1
+            except Exception as err:
+                sentiment_dict[diary.sentiment] = 1
+
+        return render(request, "statistics.html", {'sentiment_dict': sentiment_dict, 'freq_sent': max(sentiment_dict)})
+
+
+
+

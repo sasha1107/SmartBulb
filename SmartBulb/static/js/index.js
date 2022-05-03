@@ -37,7 +37,13 @@ const renderCalender = () => {
     const condition = i >= firstDateIndex && i < lastDateIndex + 1
                       ? 'this'
                       : 'other';
-    dates[i] = `<div class="date"><span class=${condition}>${date}</span></div>`;
+    if (condition == 'this') {
+        dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+    } else {
+        dates[i] = `<div class="date"><span class=${condition}>${date}</span></div>`;
+    }
+
+
   });
 
   document.querySelector('.dates').innerHTML = dates.join('');
@@ -53,19 +59,23 @@ const renderCalender = () => {
   }
 };
 
-renderCalender();
-
 const prevMonth = () => {
+  date.setDate(1);
   date.setMonth(date.getMonth() - 1);
   renderCalender();
-};
+}
 
 const nextMonth = () => {
+  date.setDate(1);
   date.setMonth(date.getMonth() + 1);
   renderCalender();
-};
+}
 
 const goToday = () => {
   date = new Date();
   renderCalender();
 };
+
+renderCalender();
+
+

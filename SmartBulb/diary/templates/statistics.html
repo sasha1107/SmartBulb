@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>마이페이지 - 마음반짝이</title>
+
+	<!-- Load fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
+	<!-- Load css styles -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
+</head>
+
+<body>
+
+	{% if sentiment_dict == 0 %}
+	<p>작성한 일기가 없습니다.</p>
+	{% else %}
+	<p>가장 많았던 감정: {{freq_sent}}</p>
+	<p>한 달 동안 다음과 같은 감정이 있었네요.</p>
+	{% for k, v in sentiment_dict.items %}
+	<p>{{k}}: {{v}}번</p>
+	{% endfor %}
+	{% endif %}
+
+
+
+</body>
+{% endblock %}
+</html>

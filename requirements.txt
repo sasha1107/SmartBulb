@@ -10,10 +10,3 @@ soynlp
 django-debug-toolbar
 pandas
 numpy
-boto3
-gluonnlp
-mxnet
-onnxruntime
-sentencepiece
-torch
-transformers
