@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 {% extends 'home.html' %}
 {% load static %}
+
 {% block content %}
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>마이페이지 - 마음반짝이</title>
 
@@ -16,18 +17,10 @@
 	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-  {% if validity == 0 %}
-      <script type="text/javascript">
-      alert("로그인이 필요합니다.");
-      </script>
-      <script type="text/javascript">
-      location.href="{% url 'login' %}";
-      </script>
-  {% endif %}
-  <section id="services">
+    <section id="services">
 		<a href="{% url 'home' %}" class="logo">
 			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
 		</a>
@@ -50,37 +43,12 @@
 			</ul>
 		</nav>
 	</section>
-  <section id="contact">
-    <div class="container">
-      <div class="calendar" style="margin: 0px auto;">
-        <div class="header">
-          <div class="year-month"></div>
-          <div class="nav">
-            <button class="nav-btn go-prev" onclick="prevMonth(); return false;">&lt;</button>
-            <button class="nav-btn go-today" onclick="goToday(); return false;">Today</button>
-            <button class="nav-btn go-next" onclick="nextMonth(); return false;">&gt;</button>
-          </div>
-        </div>
-        <div class="main">
-          <div class="days">
-            <div class="day">일</div>
-            <div class="day">월</div>
-            <div class="day">화</div>
-            <div class="day">수</div>
-            <div class="day">목</div>
-            <div class="day">금</div>
-            <div class="day">토</div>
-          </div>
-          <div class="dates"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script src="{% static 'js/index.js' %}"></script>
-  <br>
-  <a href="{% url 'home' %}">돌아가기</a><br>
-  
-      <!-- Footer start -->
+	<div id="link"></div>
+	<script src="{% static 'js/statistics.js' %}"></script>
+
+	<a href="">전구 정보 등록</a>
+
+    <!-- Footer start -->
 	<footer>
 		<div class="footer">
 			<div class="row">
@@ -114,6 +82,7 @@
 
 	<!-- Load custom js for theme -->
 	<script type="text/javascript" src="../../static/js/app.js"></script>
-{% endblock %}
+
 </body>
+{% endblock %}
 </html>

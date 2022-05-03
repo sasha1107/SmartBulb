@@ -42,3 +42,11 @@ def signup(request):
 def logout(request):
     auth.logout(request)
     return redirect("home")
+
+
+# @login_required
+def mypage(request):
+    return render(request, 'mypage.html')
+
+
+
