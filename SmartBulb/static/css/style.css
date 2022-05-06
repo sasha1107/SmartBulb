@@ -124,6 +124,7 @@ body {
 body{
 	font-family: 'Montserrat', 'Spoqa Han Sans Neo', 'sans-serif';
 	font-size: 15px;
+	background-color: #efefef;
 }
 
 p, input, textarea{
@@ -535,6 +536,19 @@ ul.social-icons > li > a{
 	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
 	margin-bottom: 0;
 	padding: 30px 50px 30px 50px;
+}
+.left-content{
+	border: #808080 1px solid;
+	text-align: center;
+	padding: 15px 10px 10px 10px;
+	margin: 10px;
+	border-radius: 10px;
+}
+.right-content{
+	border: #808080 1px solid;
+	text-align: center;
+	padding: 15px 10px 10px 10px;
+	margin: 10px;border-radius: 10px;
 }
 footer{
 	/* border-style: outset; */

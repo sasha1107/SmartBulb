@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>마이페이지 - 마음반짝이</title>
+	<title>로그인 - 마음반짝이</title>
 
 	<!-- Load fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -29,17 +29,10 @@
 			<a href="#" class="close"><i class="fa fa-close"></i></a>
 			<h3>Menu</h3>
 			<ul class="nav">
-				<li><a data-scroll href="#home">HOME</a></li>
-				<li><a data-scroll href="#services">DIARY</a></li>
-				<li><a data-scroll href="{% url 'mypage' %}">MYPAGE</a></li>
-				<li><a data-scroll href="#contact">LOGOUT</a></li>
-			</ul>
-			<ul class="social-icons">
-				<li><a href=""><i class="fa fa-facebook"></i></a></li>
-				<li><a href=""><i class="fa fa-twitter"></i></a></li>
-				<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-				<li><a href=""><i class="fa fa-behance"></i></a></li>
-				<li><a href=""><i class="fa fa-pinterest"></i></a></li>
+				<li><a data-scroll href="{% url 'home' %}">HOME</a></li>
+				<li><a data-scroll href="{% url 'login' %}">DIARY</a></li>
+				<li><a data-scroll href="{% url 'login' %}">MYPAGE</a></li>
+				<li><a data-scroll href="{% url 'login' %}">LOGIN</a></li>
 			</ul>
 		</nav>
 	</section>
@@ -112,8 +105,6 @@
 	<script type="text/javascript" src="../../static/js/bootstrap.js"></script>
 
 	<script type="text/javascript" src="../../static/js/smooth-scroll.js"></script>
-
-	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
 
 	<!-- Load custom js for theme -->
 	<script type="text/javascript" src="../../static/js/app.js"></script>
