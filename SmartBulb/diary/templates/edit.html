@@ -1,13 +1,118 @@
 <!DOCTYPE html>
 {% extends 'home.html' %}
-
+{% load static %}
 {% block content %}
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이어리 - 마음반짝이</title>
+
+    <!-- Load fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
+    <!-- Load css styles -->
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <style>
+      @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+      table {
+        text-align: center;
+        display: block;
+        /* margin: 0px 50px 0px 50px; */
+      }
+      tbody {
+        text-align: center;
+        display: inline-block;
+
+      }
+      th {
+        padding: 16px;
+      }
+      label {
+        text-align: center;
+        font-size: 16px;
+        font-family: 'Spoqa Han Sans Neo';
+      }
+      input {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 300;
+        width: 300px;
+        font-size: 16px;
+      }
+      textarea {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 300;
+        width: 300px;
+        font-size: 16px;
+      }
+      .btn{
+        padding: 15px 30px;
+        border-radius: 0;
+        -webkit-transition: border-color 0.4s, color 0.4s;
+        transition: border-color 0.4s, color 0.4s;
+      }
+
+      .btn-primary{
+        background: #fa5c58;
+        border-width: 2px;
+        color: #fff;
+        border-color: #fa5c58;
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus{
+        background: #fff;
+        color: #fa5c58;
+        border-color: #fe4a46;
+      }
+    </style>
 </head>
+
 <body>
-  <div class="container">
+  <section id="services">
+		<a href="{% url 'home' %}" class="logo">
+			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
+		</a>
+		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
+		<nav class="menu">
+			<a href="#" class="close"><i class="fa fa-close"></i></a>
+			<h3>Menu</h3>
+			<ul class="nav">
+				<li><a data-scroll href="{% url 'home' %}">HOME</a></li>
+				<li><a data-scroll href="{% url 'login' %}">DIARY</a></li>
+				<li><a data-scroll href="{% url 'login' %}">MYPAGE</a></li>
+				<li><a data-scroll href="{% url 'login' %}">LOGIN</a></li>
+			</ul>
+		</nav>
+	</section>
+
+  <section id="contact">
+		<div class="container">
+			<header>
+				<h2>일기 수정</h2>
+				<h4>{{diary.pub_date}}</h4>
+			</header>
+			<form class="row" method="POST">
+        {% csrf_token %}
+        <table>
+          {{form.as_table}}
+        </table>
+        <br>
+        <!-- <button class="btn btn-lg btn-primary" type="submit" value="" -->
+        <div class="form-group col-md-12">
+          <input class="btn btn-lg btn-primary" type="submit" value="수정">
+        </div>
+      </form>
+		</div>
+	</section>
+
+  <!-- <div class="container">
     <h4>{{diary.pub_date}}</h4>
     <form method="POST">
       {% csrf_token %}
@@ -19,8 +124,39 @@
       <input class="btn btn dark" type="submit" value="수정">
     </form>
   <a href="{% url 'main_diary' %}">돌아가기</a><br>
-</div>
+</div> -->
+<!-- Footer start -->
+<footer>
+  <div class="footer">
+    <div class="row">
+      <!-- <div class="col-md-8"> -->
+        <p>HUFS CD <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">Victory Code</a>
+</p>
+      <!-- </div> -->
+      <!-- <div class="col-md-4">
+        <ul class="social-icons">
+          <li><a href=""><i class="fa fa-facebook"></i></a></li>
+          <li><a href=""><i class="fa fa-twitter"></i></a></li>
+          <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+          <li><a href=""><i class="fa fa-behance"></i></a></li>
+          <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+</footer>
+<!-- Footer end  -->
 
+<!-- Load jQuery -->
+<script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+
+<!-- Load Booststrap -->
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/smooth-scroll.js' %}"></script>
+
+<!-- Load custom js for theme -->
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
 {% endblock %}
 </body>
