@@ -1,24 +1,187 @@
 <!DOCTYPE html>
 {% extends 'home.html' %}
-
+{% load static %}
 {% block content %}
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이어리 - 마음반짝이</title>
+
+    <!-- Load fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+
+    <!-- Load css styles -->
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <style>
+      @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+      body {
+          background-color: #efefef;
+      }
+      table {
+        text-align: center;
+        display: block;
+        /* margin: 0px 50px 0px 50px; */
+      }
+      tbody {
+        text-align: center;
+        display: inline-block;
+
+      }
+      th {
+        padding: 16px;
+      }
+      label {
+        text-align: center;
+        font-size: 16px;
+        font-family: 'Spoqa Han Sans Neo';
+      }
+      input {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 300;
+        width: 300px;
+        font-size: 16px;
+      }
+      textarea {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 300;
+        width: 300px;
+        font-size: 16px;
+      }
+      .contents {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    .left-content{
+        border-radius: 0;
+        transition: border-color 0.4s, color 0.4s;
+        background: #fa5c58;
+        border-width: 2px;
+        border-color: #fa5c58;
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+        font-size: 16px;
+    }
+    .right-content{
+        border-radius: 0;
+        transition: border-color 0.4s, color 0.4s;
+        background: #fa5c58;
+        border-width: 2px;
+        border-color: #fa5c58;
+        text-align: center;
+        padding: 5px;
+        margin: 5px;
+        font-size: 16px;
+    }
+    .left-content:hover,
+    .left-content:focus,
+    .right-content:hover,
+    .right-content:focus{
+        background: #fff;
+        color: #fa5c58;
+        border-color: #fe4a46;
+    }
+    a.hoverable{
+        color: #fff;
+    }
+    a.hoverable:hover{color:#fa5c58;}
+    </style>
 </head>
+
 <body>
+    <section id="services">
+		<a href="{% url 'home' %}" class="logo">
+			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
+		</a>
+		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
+		<nav class="menu">
+			<a href="#" class="close"><i class="fa fa-close"></i></a>
+			<h3>Menu</h3>
+			<ul class="nav">
+				<li><a data-scroll href="{% url 'home' %}">HOME</a></li>
+				<li><a data-scroll href="{% url 'login' %}">DIARY</a></li>
+				<li><a data-scroll href="{% url 'login' %}">MYPAGE</a></li>
+				<li><a data-scroll href="{% url 'login' %}">LOGIN</a></li>
+			</ul>
+		</nav>
+	</section>
+    <section id="contact">
+		<div class="container">
+			<header>
+				<h2>{{diary.pub_date}}</h2>
+				<h4><br>{{diary.title}}</h4>
+			</header>
+            <div class="col-md-12">
+                <p>{{diary.text}}</p></br>
+            </div>
+            <div class="col-md-12">
+                <p>오늘의 감정은 <strong>{{diary.sentiment}}</strong>입니다.</p></br><a href="{% url 'signup' %}"></a></p>
+            </div>
+            <div class="contents">
+				<div class="left-content">
+					<a class="hoverable" href="{% url 'edit_diary' diary_id=diary.id %}"><i class="fa fa-pencil"> 수정하기</i></a>
+				</div>
+				<div class="right-content">
+					<a class="hoverable" href="{% url 'delete_diary' diary_id=diary.id %}"><i class="fa fa-trash"> 삭제하기</i></a>
+				</div>
+			</div>
+		</div>
+	</section>
+<!-- 
     <h4>날짜: {{diary.pub_date}}</h4>
     <h4>제목: </h4>
     <p>{{diary.title}}</p>
     <h4>본문: </h4>
     <p>{{diary.text}}</p>
     <h4>감정: </h4>
-    <p>{{diary.sentiment}}</p>
+    <p>{{diary.sentiment}}</p> -->
 
-    <a href="{% url 'edit_diary' diary_id=diary.id %}"><button type="button" >수정하기</button></a>
-    <a href="{% url 'delete_diary' diary_id=diary.id %}"><button type="button" >삭제하기</button></a><br>
-    <a href="{% url 'main_diary' %}">돌아가기</a><br>
-
-{% endblock %}
-</body>
-</html>
+    <!-- <a href="{% url 'edit_diary' diary_id=diary.id %}"><button type="button" >수정하기</button></a>
+    <a href="{% url 'delete_diary' diary_id=diary.id %}"><button type="button" >삭제하기</button></a><br> -->
+    <!-- <a href="{% url 'main_diary' %}">돌아가기</a><br> -->
+<!-- Footer start -->
+    <footer>
+        <div class="footer">
+        <div class="row">
+            <!-- <div class="col-md-8"> -->
+            <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://bootstrapthemes.co" style="color: #fa5c58;">Victory Code</a>
+  </p>
+            <!-- </div> -->
+            <!-- <div class="col-md-4">
+            <ul class="social-icons">
+                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                <li><a href=""><i class="fa fa-behance"></i></a></li>
+                <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+            </ul>
+            </div> -->
+        </div>
+        </div>
+    </footer>
+    <!-- Footer end  -->
+    
+    <!-- Load jQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    
+    <!-- Load Booststrap -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    
+    <script type="text/javascript" src="{% static 'js/smooth-scroll.js' %}"></script>
+    
+    <!-- Load custom js for theme -->
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+  
+  {% endblock %}
+  </body>
+  </html>
