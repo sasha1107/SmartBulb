@@ -18,7 +18,7 @@ filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
 
 
 def analyze_sentiment(sentence):
-    sentiment = Sentiment.objects.get(sentiment="중립")
+    sentiment = Sentiment.objects.get(sentiment="부정")
 
     return sentiment
 
@@ -118,6 +118,9 @@ def statistics(request, year, month):
 
     sentiment_dict = {}
 
+    max_value = 0
+    max_sentiment = ""
+
     if not diaries:
         return render(request, "statistics.html", {'sentiment_dict': 0})
     else:
@@ -128,7 +131,12 @@ def statistics(request, year, month):
             except Exception as err:
                 sentiment_dict[diary.sentiment] = 1
 
-        return render(request, "statistics.html", {'sentiment_dict': sentiment_dict, 'freq_sent': max(sentiment_dict)})
+        for k, v in sentiment_dict.items():
+            if max_value < v:
+                max_value = v
+                max_sentiment = k
+
+        return render(request, "statistics.html", {'sentiment_dict': sentiment_dict, 'freq_sent': max_sentiment})
 
 
 
