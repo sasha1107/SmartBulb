@@ -1,38 +1,116 @@
 <!DOCTYPE html>
 {% extends 'home.html' %}
 {% load static %}
-
 {% block content %}
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>마이페이지 - 마음반짝이</title>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이어리 - 마음반짝이</title>
 
-	<!-- Load fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <!-- Load fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 
-	<!-- Load css styles -->
-	<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="../../static/css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="../../static/css/style.css" />
+    <!-- Load css styles -->
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <style>
+      p {
+      	text-align: center;
+      }
+
+      h2 {
+      	text-align: center;
+      	color: #fa5c58;
+      }
+    </style>
 </head>
 
 <body>
+<body>
+    <section id="services">
+		<a href="{% url 'home' %}" class="logo">
+			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
+		</a>
+		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
+		<nav class="menu">
+			<a href="#" class="close"><i class="fa fa-close"></i></a>
+			<h3>Menu</h3>
+			<ul class="nav">
+				<li><a data-scroll href="{% url 'home' %}">HOME</a></li>
+				<li><a data-scroll href="{% url 'main_diary' %}" >DIARY</a></li>
+				<li><a data-scroll href="{% url 'mypage' %}">MYPAGE</a></li>
+				<li><a data-scroll href="{% url 'logout' %}">LOGOUT</a></li>
+			</ul>
 
-	{% if sentiment_dict == 0 %}
-	<p>작성한 일기가 없습니다.</p>
-	{% else %}
-	<p>가장 많았던 감정: {{freq_sent}}</p>
-	<p>한 달 동안 다음과 같은 감정이 있었네요.</p>
-	{% for k, v in sentiment_dict.items %}
-	<p>{{k}}: {{v}}번</p>
-	{% endfor %}
-	{% endif %}
+		</nav>
+	</section>
+
+	<section id="contact">
+	<div class="container">
+		<header>
+			<h2>Statistics</h2>
+			<p>통계페이지
+			</p>
+		</header>
+		<div class="contents">
+			{% if sentiment_dict == 0 %}
+					<p>작성한 일기가 없습니다.</p>
+					{% else %}
+					<p>가장 많았던 감정</p>
+					<h2>{{freq_sent}}</h2>
+			<div class="left-content">
+					<p>한 달 동안 다음과 같은 감정이 있었네요.</p>
+					{% for k, v in sentiment_dict.items %}
+					<p>{{k}}: {{v}}번</p>
+					{% endfor %}
+					{% endif %}
+			</div>
+		</div>
 
 
 
-</body>
+
+
+   <footer>
+    <div class="footer">
+      <div class="row">
+        <!-- <div class="col-md-8"> -->
+          <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://bootstrapthemes.co" style="color: #fa5c58;">Victory Code</a>
+          </p>
+        <!-- </div> -->
+        <!-- <div class="col-md-4">
+          <ul class="social-icons">
+            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+            <li><a href=""><i class="fa fa-behance"></i></a></li>
+            <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+  <!-- Footer end  -->
+
+  <!-- Load jQuery -->
+  <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+
+  <!-- Load Booststrap -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+
+  <script type="text/javascript" src="{% static 'js/smooth-scroll.js' %}"></script>
+
+  <!-- Load custom js for theme -->
+  <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
 {% endblock %}
+	</div>
+	</section>
+</body>
 </html>
