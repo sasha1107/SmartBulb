@@ -80,12 +80,24 @@ body {
 
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
-  color: #D13E3E;
+	color: #D13E3E;
+}
+.day:nth-child(7n + 1) a{
+  color: #D13E3E !important;
 }
 
+.date:nth-child(7n + 1) a{
+  color: #D13E3E !important;
+}
 .day:nth-child(7n),
 .date:nth-child(7n) {
-  color: #396EE2;
+	color: #396EE2;
+}
+.day:nth-child(7n) a{
+	color: #396EE2 !important;
+}
+.date:nth-child(7n) a{
+  color: #396EE2 !important;
 }
 
 .other {
