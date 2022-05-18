@@ -4,18 +4,27 @@ from django.utils import timezone
 import datetime
 from pathlib import Path
 from accounts.models import CustomUser
+from accounts.views import bulb_ip
 from .models import Sentiment, Diary
 from .form import DiaryPost
 import pandas as pd
+from yeelight import Bulb
+import random
 # from soynlp.normalizer import *
 # from hanspell import spell_checker
 import os
-
+import sys
 # Create your views here.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
-
+bulb_reqeust = False
+bulb_on = 0
+sentiment_to_light = {
+    "긍정": [(0, 0, 255), (129, 193, 71)],
+    "중립": [(255, 127, 0), (255, 0, 0)],
+    "부정": [(255, 212, 0), (255, 212, 0)]
+}
 
 def analyze_sentiment(sentence):
     sentiment = Sentiment.objects.get(sentiment="부정")
@@ -76,9 +85,15 @@ def save_diary(request, year, month, day):
 
 @login_required
 def view_diary(request, diary_id):
+    global bulb_reqeust, bulb_on
     diary = Diary.objects.filter(user=request.user.id)
     diary_text = get_object_or_404(diary, pk=diary_id)
-    return render(request, "diary.html", {'diary': diary_text})
+
+    if bulb_reqeust:
+        bulb_reqeust = False
+        return render(request, "diary.html", {'diary': diary_text, 'bulb_on': bulb_on})
+    else:
+        return render(request, "diary.html", {'diary': diary_text})
 
 
 @login_required
@@ -139,5 +154,21 @@ def statistics(request, year, month):
         return render(request, "statistics.html", {'sentiment_dict': sentiment_dict, 'freq_sent': max_sentiment})
 
 
+def turn_on_bulbs(request, diary_id):
+    global bulb_reqeust, bulb_on
+    bulb_reqeust = True
+    if not bulb_ip:
+        bulb_on = 0
+        return redirect("view_diary", str(diary_id))
+    else:
+        diary = Diary.objects.filter(user=request.user.id)
+        diary_text = get_object_or_404(diary, pk=diary_id)
 
+        bulb_on = 1
+        index = random.randint(0, 1)
 
+        bulb = Bulb(bulb_ip)
+        bulb.set_rgb(sentiment_to_light[diary_text.sentiment][index])
+
+        bulb.toggle()
+        return redirect("view_diary", str(diary_id))

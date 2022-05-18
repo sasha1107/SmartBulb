@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import CustomUser
 from django.contrib import auth
+from yeelight import discover_bulbs
 
 
 # Create your views here.
-
+bulb_ip = ""
 
 def login(request):
     if request.method == "POST":
@@ -47,6 +48,20 @@ def logout(request):
 # @login_required
 def mypage(request):
     return render(request, 'mypage.html')
+
+
+def register_bulb(request):
+    global bulb_ip
+    bulb_data = discover_bulbs()
+    register = 0
+    for bulb in bulb_data:
+        try:
+            bulb_ip = bulb['ip']
+            register = 1
+        except Exception as err:
+            pass
+
+    return render(request, "mypage.html", {"register": register});
 
 
 
