@@ -125,7 +125,16 @@
                 <p>{{diary.text}}</p></br></br>
             </div>
             <div class="col-md-12">
-              <img src="{% static '/img/lightbulb_sad.png' %}" width=70px height=70px style="margin-bottom:10px;">
+                <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/lightbulb_sad.png' %}" width=70px height=70px style="margin-bottom:10px;"></a>
+                {% if bulb_on == 1 %}
+					<script type="text/javascript">
+					alert("전구가 켜졌습니다.");
+					</script>
+				{% elif bulb_on == 0 %}
+					<script type="text/javascript">
+					alert("마이페이지에서 전구 정보를 등록해주세요.");
+					</script>
+                {% endif %}
             </div>
             <div class="col-md-12">
                 <p>오늘의 감정은 <strong>{{diary.sentiment}}</strong>입니다.</p></br><a href="{% url 'signup' %}"></a></p>

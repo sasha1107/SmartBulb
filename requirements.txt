@@ -10,3 +10,4 @@ soynlp
 django-debug-toolbar
 pandas
 numpy
+yeelight
