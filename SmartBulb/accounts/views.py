@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import CustomUser
 from django.contrib import auth
-from yeelight import discover_bulbs
+from yeelight import discover_bulbs, Bulb
 
 
 # Create your views here.
@@ -52,15 +52,33 @@ def mypage(request):
 
 def register_bulb(request):
     global bulb_ip
-    bulb_data = discover_bulbs()
+    bulb_data = discover_bulbs() #딕셔너리 형태로 저장
+
+    #수현 수정 시작
+    # register = 0
+    # try:
+    #     bulb_ip = bulb_data[0]['ip']
+    #     bulb = Bulb(bulb_ip)
+    #     # RED = [255, 0, 0]
+    #     # bulb.set_rgb(*RED)
+    #     register = 1
+    # except Exception as err:
+    #     pass
+    #수현 수정 끝
+
+    #기존 코드 시작
     register = 0
     for bulb in bulb_data:
         try:
             bulb_ip = bulb['ip']
             register = 1
+            bulb = Bulb(bulb_ip)
+            # RED = [255, 0, 0]
+            # bulb.set_rgb(*RED)
         except Exception as err:
             pass
-
+    #기존 코드 끝
+    
     return render(request, "mypage.html", {"register": register});
 
 

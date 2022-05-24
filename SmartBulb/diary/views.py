@@ -8,7 +8,7 @@ from accounts.views import bulb_ip
 from .models import Sentiment, Diary
 from .form import DiaryPost
 import pandas as pd
-from yeelight import Bulb
+from yeelight import discover_bulbs, Bulb
 import random
 # from soynlp.normalizer import *
 # from hanspell import spell_checker
@@ -21,9 +21,9 @@ filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
 bulb_reqeust = False
 bulb_on = 0
 sentiment_to_light = {
-    "긍정": [(0, 0, 255), (129, 193, 71)],
-    "중립": [(255, 127, 0), (255, 0, 0)],
-    "부정": [(255, 212, 0), (255, 212, 0)]
+    "긍정": [[0, 0, 255], [129, 193, 71]],
+    "중립": [[255, 127, 0], [255, 0, 0]],
+    "부정": [[255, 212, 0], [255, 212, 0]]
 }
 
 def analyze_sentiment(sentence):
@@ -156,6 +156,29 @@ def statistics(request, year, month):
 
 def turn_on_bulbs(request, diary_id):
     global bulb_reqeust, bulb_on
+    
+    #기존 코드 시작
+    # bulb_reqeust = True
+    # if not bulb_ip:
+    #     bulb_on = 0
+    #     return redirect("view_diary", str(diary_id))
+    # else:
+    #     diary = Diary.objects.filter(user=request.user.id)
+    #     diary_text = get_object_or_404(diary, pk=diary_id)
+
+    #     bulb_on = 1
+    #     index = random.randint(0, 1)
+
+    #     bulb = Bulb(bulb_ip)
+    #     bulb.set_rgb(sentiment_to_light[diary_text.sentiment][index])
+
+    #     bulb.toggle()
+    #기존 코드 끝
+
+    #수현 테스트 시작
+    bulb_data = discover_bulbs()
+    bulb_ip = bulb_data[0]['ip']
+
     bulb_reqeust = True
     if not bulb_ip:
         bulb_on = 0
@@ -167,8 +190,15 @@ def turn_on_bulbs(request, diary_id):
         bulb_on = 1
         index = random.randint(0, 1)
 
+        #전구 연결
         bulb = Bulb(bulb_ip)
-        bulb.set_rgb(sentiment_to_light[diary_text.sentiment][index])
 
-        bulb.toggle()
+        #전구가 꺼져있을 때 켜기
+        if bulb.get_properties()['power'] == 'off':
+            bulb.turn_on()
+        
+        bulb.set_rgb(*(sentiment_to_light["부정"][index])) #sentiment 불러오는 게 아직 안돼서 작동이 안되는지 모르겠음
+    #수현 테스트 끝
+
+
         return redirect("view_diary", str(diary_id))

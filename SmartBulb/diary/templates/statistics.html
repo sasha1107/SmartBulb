@@ -16,9 +16,9 @@
     <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static '/css/font-awesome.css' %}">
     <style>
       p {
       	text-align: center;
@@ -27,6 +27,9 @@
       h2 {
       	text-align: center;
       	color: #fa5c58;
+      }
+      body {
+        background-color: #efefef;
       }
     </style>
 </head>
@@ -72,11 +75,8 @@
 					{% endif %}
 			</div>
 		</div>
-
-
-
-
-
+  </div>
+  </section>
    <footer>
     <div class="footer">
       <div class="row">
@@ -110,7 +110,5 @@
   <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
 {% endblock %}
-	</div>
-	</section>
 </body>
 </html>
