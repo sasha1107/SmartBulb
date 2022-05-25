@@ -41,7 +41,7 @@ const renderCalender = () => {
         dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else {
         dates[i] = `<div class="date"><span class=${condition}>${date}</span></div>`;
-    }
+    }var 
 
 
   });
@@ -75,6 +75,7 @@ const goToday = () => {
   date = new Date();
   renderCalender();
 };
+
 
 renderCalender();
 
