@@ -26,8 +26,14 @@
 
       h2 {
       	text-align: center;
+      	color: black;
+      }
+
+      h3 {
+      	text-align: center;
       	color: #fa5c58;
       }
+
       body {
         background-color: #efefef;
       }
@@ -59,20 +65,16 @@
 	<div class="container">
 		<header>
 			<h2>Statistics</h2>
-			<p>통계페이지
-			</p>
+			<p>통계페이지</p>
 		</header>
 		<div class="contents">
 			{% if sentiment_dict == 0 %}
 					<p>작성한 일기가 없습니다.</p>
 					{% else %}
 					<p>가장 많았던 감정</p>
-					<h2>{{freq_sent}}</h2>
+					<h3>{{freq_sent}}</h3>
 			<div class="left-content">
 					<p>한 달 동안 다음과 같은 감정이 있었네요.</p>
-					{% for k, v in sentiment_dict.items %}
-					<p>{{k}}: {{v}}번</p>
-					{% endfor %}
 					{% endif %}
           <canvas id="pie-chart" style="display: inline-block; height: 500px; width: 500px;" width="800" height="450"></canvas>
 			</div>
