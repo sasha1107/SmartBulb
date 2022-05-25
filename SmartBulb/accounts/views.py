@@ -6,7 +6,6 @@ from yeelight import discover_bulbs, Bulb
 
 
 # Create your views here.
-bulb_ip = ""
 
 def login(request):
     if request.method == "POST":
@@ -29,7 +28,7 @@ def signup(request):
                 return render(request, "signup.html", {"registered": 1, "validity": 1, "filled": 1})
             elif request.POST["password1"] == request.POST["password2"]:
                 user = CustomUser.objects.create_user(
-                    username=request.POST["username"], password=request.POST["password1"])
+                    username=request.POST["username"], password=request.POST["password1"], user_ip="")
                 auth.login(request, user)
                 return redirect('home')
             else:
@@ -51,33 +50,19 @@ def mypage(request):
 
 
 def register_bulb(request):
-    global bulb_ip
-    bulb_data = discover_bulbs() #딕셔너리 형태로 저장
+    user = CustomUser.objects.get(username=request.user)
+    bulb_data = discover_bulbs()  # 딕셔너리 형태로 저장
 
-    #수현 수정 시작
-    # register = 0
-    # try:
-    #     bulb_ip = bulb_data[0]['ip']
-    #     bulb = Bulb(bulb_ip)
-    #     # RED = [255, 0, 0]
-    #     # bulb.set_rgb(*RED)
-    #     register = 1
-    # except Exception as err:
-    #     pass
-    #수현 수정 끝
-
-    #기존 코드 시작
+    # 기존 코드 시작
     register = 0
     for bulb in bulb_data:
         try:
-            bulb_ip = bulb['ip']
+            user.user_ip = bulb['ip']
+            user.save()
             register = 1
-            bulb = Bulb(bulb_ip)
-            # RED = [255, 0, 0]
-            # bulb.set_rgb(*RED)
         except Exception as err:
             pass
-    #기존 코드 끝
+    # 기존 코드 끝
     
     return render(request, "mypage.html", {"register": register});
 

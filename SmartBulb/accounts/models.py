@@ -6,3 +6,4 @@ from django.contrib.auth.models import User
 class CustomUser(User):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    user_ip = models.CharField(max_length=50, null=True)
