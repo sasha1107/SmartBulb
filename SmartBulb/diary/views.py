@@ -4,7 +4,6 @@ from django.utils import timezone
 import datetime
 from pathlib import Path
 from accounts.models import CustomUser
-from accounts.views import bulb_ip
 from .models import Sentiment, Diary
 from .form import DiaryPost
 import pandas as pd
@@ -18,13 +17,14 @@ import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
-bulb_reqeust = False
+bulb_request = False
 bulb_on = 0
 sentiment_to_light = {
     "긍정": [[0, 0, 255], [129, 193, 71]],
     "중립": [[255, 127, 0], [255, 0, 0]],
     "부정": [[255, 212, 0], [255, 212, 0]]
 }
+
 
 def analyze_sentiment(sentence):
     sentiment = Sentiment.objects.get(sentiment="부정")
@@ -85,12 +85,12 @@ def save_diary(request, year, month, day):
 
 @login_required
 def view_diary(request, diary_id):
-    global bulb_reqeust, bulb_on
+    global bulb_request, bulb_on
     diary = Diary.objects.filter(user=request.user.id)
     diary_text = get_object_or_404(diary, pk=diary_id)
 
-    if bulb_reqeust:
-        bulb_reqeust = False
+    if bulb_request:
+        bulb_request = False
         return render(request, "diary.html", {'diary': diary_text, 'bulb_on': bulb_on})
     else:
         return render(request, "diary.html", {'diary': diary_text})
@@ -155,31 +155,13 @@ def statistics(request, year, month):
 
 
 def turn_on_bulbs(request, diary_id):
-    global bulb_reqeust, bulb_on
-    
-    #기존 코드 시작
-    # bulb_reqeust = True
-    # if not bulb_ip:
-    #     bulb_on = 0
-    #     return redirect("view_diary", str(diary_id))
-    # else:
-    #     diary = Diary.objects.filter(user=request.user.id)
-    #     diary_text = get_object_or_404(diary, pk=diary_id)
+    global bulb_request, bulb_on, sentiment_to_light
 
-    #     bulb_on = 1
-    #     index = random.randint(0, 1)
+    # 수현 테스트 시작
+    user = CustomUser.objects.get(username=request.user)
+    bulb_ip = user.user_ip
+    bulb_request = True
 
-    #     bulb = Bulb(bulb_ip)
-    #     bulb.set_rgb(sentiment_to_light[diary_text.sentiment][index])
-
-    #     bulb.toggle()
-    #기존 코드 끝
-
-    #수현 테스트 시작
-    bulb_data = discover_bulbs()
-    bulb_ip = bulb_data[0]['ip']
-
-    bulb_reqeust = True
     if not bulb_ip:
         bulb_on = 0
         return redirect("view_diary", str(diary_id))
@@ -187,18 +169,19 @@ def turn_on_bulbs(request, diary_id):
         diary = Diary.objects.filter(user=request.user.id)
         diary_text = get_object_or_404(diary, pk=diary_id)
 
-        bulb_on = 1
         index = random.randint(0, 1)
 
-        #전구 연결
+        # 전구 연결
         bulb = Bulb(bulb_ip)
 
-        #전구가 꺼져있을 때 켜기
+        # 전구가 꺼져 있을 때 켜기
         if bulb.get_properties()['power'] == 'off':
+            bulb_on = 1
             bulb.turn_on()
+        else:
+            bulb_on = 0
         
-        bulb.set_rgb(*(sentiment_to_light["부정"][index])) #sentiment 불러오는 게 아직 안돼서 작동이 안되는지 모르겠음
-    #수현 테스트 끝
-
+        bulb.set_rgb(*(sentiment_to_light[f"{diary_text.sentiment}"][index]))  # sentiment 불러 오는 게 아직 안돼서 작동이 안 되는지 모르겠음
+        # 수현 테스트 끝
 
         return redirect("view_diary", str(diary_id))

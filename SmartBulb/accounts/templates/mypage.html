@@ -68,10 +68,12 @@
 				{% if register == 1 %}
 					<script type="text/javascript">
 					alert("전구 정보가 등록되었습니다.");
+					history.back();
 					</script>
 				{% elif register == 0 %}
 					<script type="text/javascript">
 					alert("전구 정보가 등록에 실패하였습니다.");
+					history.back();
 					</script>
                 {% endif %}
 			
