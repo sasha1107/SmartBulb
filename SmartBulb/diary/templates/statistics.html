@@ -32,6 +32,7 @@
         background-color: #efefef;
       }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
 <body>
@@ -73,6 +74,7 @@
 					<p>{{k}}: {{v}}번</p>
 					{% endfor %}
 					{% endif %}
+          <canvas id="pie-chart" style="display: inline-block; height: 500px; width: 500px;" width="800" height="450"></canvas>
 			</div>
 		</div>
   </div>
@@ -99,6 +101,7 @@
   <!-- Footer end  -->
 
   <!-- Load jQuery -->
+  <script type="text/javascript" src="{% static 'js/chart.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
 
   <!-- Load Booststrap -->
