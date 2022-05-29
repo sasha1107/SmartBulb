@@ -21,6 +21,15 @@
 	a {
 		color: #333;
 	}
+
+	.date_published {
+        display: none;
+	}
+
+	.img_pub {
+	    width: 20px;
+	    height: 20px;
+	}
   </style>
 </head>
 <body>
@@ -32,7 +41,7 @@
       location.href="{% url 'login' %}";
       </script>
   {% endif %}
-  <section id="services">
+  <section id="services" onload="">
 		<a href="{% url 'home' %}" class="logo">
 			<img src="{% static '/img/lightbulb.png' %}" width=60px height=60px style="margin-top:5px; display:block; margin:0px auto;">
 		</a>
@@ -74,9 +83,12 @@
       </div>
     </div>
   </section>
+  {% for date in dates %}
+  <p class="date_published">{{date}}</p>
+  {% endfor %}
   <script src="{% static 'js/index.js' %}"></script>
+
   <br>
-  <a href="{% url 'home' %}">돌아가기</a><br>
   
       <!-- Footer start -->
 	<footer>

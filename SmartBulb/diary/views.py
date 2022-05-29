@@ -46,10 +46,18 @@ def init_db(request):
 
 
 def main_diary(request):
+    diary = Diary.objects.filter(user=request.user.id)
+    dates = []
+    tmp = ""
+
+    for i in range(len(diary)):
+        tmp = str(diary[i].pub_date.isoformat()).split("-")[2]
+        dates.append(tmp)
+
     if not request.user.is_authenticated:
         return render(request, "main_diary.html", {"validity": 0})
 
-    return render(request, "main_diary.html")
+    return render(request, "main_diary.html", {"dates": dates})
 
 
 @login_required
