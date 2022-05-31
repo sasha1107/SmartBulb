@@ -139,7 +139,7 @@ def edit_diary(request, diary_id):
 def statistics(request, year, month):
     diaries = Diary.objects.filter(user=request.user.id)
 
-    sentiment_dict = {}
+    sentiment_dict = {"긍정": 0, "부정": 0, "중립": 0}
 
     max_value = 0
     max_sentiment = ""
@@ -150,9 +150,9 @@ def statistics(request, year, month):
 
         for diary in diaries:
             try:
-                sentiment_dict[diary.sentiment] += 1
+                sentiment_dict[f"{diary.sentiment}"] += 1
             except Exception as err:
-                sentiment_dict[diary.sentiment] = 1
+                sentiment_dict[f"{diary.sentiment}"] = 1
 
         for k, v in sentiment_dict.items():
             if max_value < v:

@@ -37,11 +37,14 @@
       body {
         background-color: #efefef;
       }
+
+      .sentiment {
+      	display: none;
+      }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 
-<body>
 <body>
     <section id="services">
 		<a href="{% url 'home' %}" class="logo">
@@ -76,6 +79,9 @@
 			<div class="left-content">
 					<p>한 달 동안 다음과 같은 감정이 있었네요.</p>
 					{% endif %}
+			{% for k, v in sentiment_dict.items %}
+				<p class="sentiment">{{k}}:{{v}}</p>
+			{% endfor %}
           <canvas id="pie-chart" style="display: inline-block; height: 500px; width: 500px;" width="800" height="450"></canvas>
 			</div>
 		</div>
