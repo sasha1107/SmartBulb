@@ -182,7 +182,7 @@
             <div class="col-md-12">
                 <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/lightbulb_sad.png' %}" width=70px height=70px style="margin-bottom:10px;"></a></br>
                 <label class="switch-button">
-                  <input type="checkbox"/>
+                  <input type="checkbox" onclick="location.href='{% url 'turn_on_bulbs' diary_id=diary.id %}"/>
                     <span class="onoff-switch"></span>
                 </label>
                 {% if bulb_on == 1 %}
