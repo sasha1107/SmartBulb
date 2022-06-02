@@ -71,6 +71,47 @@
         color: #fa5c58;
         border-color: #fe4a46;
       }
+      .contents {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+            padding-left: 50px;
+            padding-right: 50px;
+      }
+      .left-content{
+          border-radius: 0;
+          transition: border-color 0.4s, color 0.4s;
+          background: #fa5c58;
+          border-width: 2px;
+          border-color: #fa5c58;
+          text-align: center;
+          padding: 5px;
+          margin: 5px;
+          font-size: 16px;
+      }
+      .right-content{
+          border-radius: 0;
+          transition: border-color 0.4s, color 0.4s;
+          background: #fa5c58;
+          border-width: 2px;
+          border-color: #fa5c58;
+          text-align: center;
+          padding: 5px;
+          margin: 5px;
+          font-size: 16px;
+      }
+      .left-content:hover,
+      .left-content:focus,
+      .right-content:hover,
+      .right-content:focus{
+          background: #fff;
+          color: #fa5c58;
+          border-color: #fe4a46;
+      }
+      a.hoverable{
+          color: #fff;
+      }
+      a.hoverable:hover{color:#fa5c58;}
     </style>
 </head>
 <body>
@@ -94,6 +135,7 @@
   <section id="contact">
 		<div class="container">
 			<header>
+        <h3 style="text-align: left; margin-top: 0px; margin-left: 10px;"><a style="color:#808080" href="{% url 'main_diary' %}"><i class="fa fa-mail-reply"></i></a></h3>
 				<h2>새로운 일기 작성</h2>
 				<h4>{{year}}년 {{month}}월 {{day}}일</h4>
 			</header>
@@ -103,10 +145,12 @@
           {{form.as_table}}
         </table>
         <br>
-        <!-- <button class="btn btn-lg btn-primary" type="submit" value="" -->
         <div class="form-group col-md-12">
           <input class="btn btn-lg btn-primary" type="submit" value="저장">
         </div>
+        <!-- <div class="form-group col-md-12">
+          <input class="btn btn-lg btn-primary" type="submit" value="저장">
+        </div> -->
       </form>
 		</div>
 	</section>

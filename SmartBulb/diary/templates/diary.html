@@ -95,6 +95,10 @@
         color: #fff;
     }
     a.hoverable:hover{color:#fa5c58;}
+    .col-md-12 {
+      vertical-align: center;
+      text-align: center;
+    }
     </style>
 </head>
 
@@ -118,6 +122,7 @@
     <section id="contact">
 		<div class="container">
 			<header>
+        <h3 style="text-align: left; margin-top: 0px; margin-left: 10px;"><a style="color:#808080" href="{% url 'main_diary' %}"><i class="fa fa-mail-reply"></i></a></h3>
 				<h2>{{diary.pub_date}}</h2>
 				<h4><br>{{diary.title}}</h4>
 			</header>
