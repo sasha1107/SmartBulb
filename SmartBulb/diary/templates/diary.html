@@ -99,56 +99,6 @@
       vertical-align: center;
       text-align: center;
     }
-    .switch-button {
-        position: relative;
-        display: inline-block;
-        width: 55px;
-        height: 30px;
-    }
-
-    .switch-button input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .onoff-switch {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius:20px;
-        background-color: #ccc;
-        box-shadow: inset 1px 5px 1px #999;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    .onoff-switch:before {
-        position: absolute;
-        content: "";
-        height: 22px;
-        width: 22px;
-        left: 4px;
-        bottom: 4px;
-        background-color: #fff;
-        -webkit-transition: .5s;
-        transition: .4s;
-        border-radius:20px;
-    }
-
-    .switch-button input:checked + .onoff-switch {
-        background-color: #fa5c58;
-        box-shadow: inset 1px 5px 1px #fa5c58;
-    }
-
-    .switch-button input:checked + .onoff-switch:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
     </style>
 </head>
 
@@ -171,22 +121,30 @@
 	</section>
     <section id="contact">
 		<div class="container">
-			<header>
+			<header style="margin-bottom: 20px">
         <h3 style="text-align: left; margin-top: 0px; margin-left: 10px;"><a style="color:#808080" href="{% url 'main_diary' %}"><i class="fa fa-mail-reply"></i></a></h3>
-				<h2>{{diary.pub_date}}</h2>
-				<h4><br>{{diary.title}}</h4>
+				<h2>{{diary.pub_date}}<br><br></h2>
+				<h4>{{diary.title}}</h4>
 			</header>
-            <div class="col-md-12">
+            <div class="col-md-12" style="border: solid 1px #808080; margin-bottom: 25px; border-radius: 10px; padding: 10px;">
                 <p>{{diary.text}}</p></br></br>
             </div>
-            <div class="col-md-12">
-                <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/lightbulb_sad.png' %}" width=70px height=70px style="margin-bottom:10px;"></a></br>
-                <label class="switch-button">
-                  <input type="checkbox" onclick="location.href='{% url 'turn_on_bulbs' diary_id=diary.id %}"/>
+            <div class="contents">
+              <div class="left" style="text-align: right; padding-right:8px">
+                <img src="{% static '/img/lightbulb_sad.png' %}" text-align=right width=100px height=100px style="margin-bottom:10px;"></a></br>
+              </div>
+              <div class="right" style="line-height: 110px;">
+                <p style="align-self:right; text-align: left; padding-left:8px; font-size: 16px;">오늘의 감정은 <strong style="color:#fa5c58;">{{diary.sentiment}}</strong>입니다.</p>
+              </div>
+              </div>
+            <div class="col-md-12" style="margin-bottom: 20px;">
+              <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="70" height="70" alt=""></a>
+                <!-- <label class="switch-button">
+                  <input type="checkbox">
                     <span class="onoff-switch"></span>
-                </label>
-                {% if bulb_on == 1 %}
-					<script type="text/javascript">
+                </label> -->
+        {% if bulb_on == 1 %}
+          <script type="text/javascript">
 					alert("전구가 켜졌습니다.");
 					</script>
 				{% elif bulb_on == 0 %}
@@ -194,9 +152,6 @@
 					alert("마이페이지에서 전구 정보를 등록해주세요.");
 					</script>
                 {% endif %}
-            </div>
-            <div class="col-md-12">
-                <p>오늘의 감정은 <strong>{{diary.sentiment}}</strong>입니다.</p></br><a href="{% url 'signup' %}"></a></p>
             </div>
             <div class="contents">
 				<div class="left-content">
@@ -208,19 +163,6 @@
 			</div>
 		</div>
 	</section>
-<!-- 
-    <h4>날짜: {{diary.pub_date}}</h4>
-    <h4>제목: </h4>
-    <p>{{diary.title}}</p>
-    <h4>본문: </h4>
-    <p>{{diary.text}}</p>
-    <h4>감정: </h4>
-    <p>{{diary.sentiment}}</p> -->
-
-    <!-- <a href="{% url 'edit_diary' diary_id=diary.id %}"><button type="button" >수정하기</button></a>
-    <a href="{% url 'delete_diary' diary_id=diary.id %}"><button type="button" >삭제하기</button></a><br> -->
-    <!-- <a href="{% url 'main_diary' %}">돌아가기</a><br> -->
-<!-- Footer start -->
     <footer>
         <div class="footer">
         <div class="row">
@@ -252,13 +194,15 @@
     
     <!-- Load custom js for theme -->
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
     <!-- 토글 -->
-    <script>
+    <!-- <script>
       var check = $("input[type='checkbox']");
       check.click(function(){
-        location.href= '{% url 'turn_on_bulbs' diary_id=diary.id %}'
+        location.href= "{% url 'turn_on_bulbs' diary_id=diary.id %}"
+        bulb_on = 1
       });
-    </script>
+    </script> -->
   {% endblock %}
   </body>
   </html>

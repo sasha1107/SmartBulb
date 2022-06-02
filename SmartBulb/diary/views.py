@@ -190,7 +190,7 @@ def turn_on_bulbs(request, diary_id):
             bulb_on = 1
             bulb.turn_on()
         else:
-            bulb_on = 0
+            bulb_on = 1
         
         bulb.set_rgb(*(sentiment_to_light[f"{diary_text.sentiment}"][index]))  # sentiment 불러 오는 게 아직 안돼서 작동이 안 되는지 모르겠음
         # 수현 테스트 끝
