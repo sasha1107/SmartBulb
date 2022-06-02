@@ -126,20 +126,22 @@
 				<h2>{{diary.pub_date}}<br><br></h2>
 				<h4>{{diary.title}}</h4>
 			</header>
-            <div class="col-md-12" style="border: solid 1px #808080; margin-bottom: 25px; border-radius: 10px; padding: 10px;">
+            <div class="col-md-12" style="border: solid 1px #808080; margin-bottom: 20px; border-radius: 10px; padding: 10px;">
                 <p>{{diary.text}}</p></br></br>
             </div>
             <div class="contents">
-              <div class="left" style="text-align: right; padding-right:8px">
-                <img src="{% static '/img/lightbulb_sad.png' %}" text-align=right width=100px height=100px style="margin-bottom:10px;"></a></br>
+              <div class="left" style="text-align: right; padding-right:8px; line-height: 110px;">
+                <img src="{% static '/img/lightbulb_sad.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
               </div>
-              <div class="right" style="line-height: 110px;">
-                <p style="align-self:right; text-align: left; padding-left:8px; font-size: 16px;">오늘의 감정은 <strong style="color:#fa5c58;">{{diary.sentiment}}</strong>입니다.</p>
+              <div class="right" style="line-height: 110px; padding-left: 8px; text-align: left; align-self: right;">
+                <p style="align-self:right; font-size: 16px;">오늘의 감정은 <strong style="color:#fa5c58;">{{diary.sentiment}}</strong>입니다.</p>
               </div>
-              </div>
-            <div class="col-md-12" style="margin-bottom: 20px;">
-              <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="70" height="70" alt=""></a>
-                <!-- <label class="switch-button">
+            </div>
+            <div class="col-md-12" style="background-color: #efefef; width: fit-content; padding: 12px 20px 3px 20px; margin-bottom: 20px; border-radius: 10px;">
+              <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="50" height="50" alt=""></a>
+              <p style="margin-top: 10px; font-size: 14px; color: #fa5c58;">전구를 켜시겠습니까?</p>
+            </div>
+                   <!-- <label class="switch-button">
                   <input type="checkbox">
                     <span class="onoff-switch"></span>
                 </label> -->
@@ -152,7 +154,7 @@
 					alert("마이페이지에서 전구 정보를 등록해주세요.");
 					</script>
                 {% endif %}
-            </div>
+            
             <div class="contents">
 				<div class="left-content">
 					<a class="hoverable" href="{% url 'edit_diary' diary_id=diary.id %}"><i class="fa fa-pencil"> 수정하기</i></a>
