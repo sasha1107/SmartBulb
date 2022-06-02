@@ -13,6 +13,8 @@ import random
 # from hanspell import spell_checker
 import os
 import sys
+
+
 # Create your views here.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,12 +54,13 @@ def main_diary(request):
 
     for i in range(len(diary)):
         tmp = str(diary[i].pub_date.isoformat()).split("-")[2]
+        # sentiment.append(diary[i].sentiment)
         dates.append(tmp)
 
     if not request.user.is_authenticated:
         return render(request, "main_diary.html", {"validity": 0})
 
-    return render(request, "main_diary.html", {"dates": dates})
+    return render(request, "main_diary.html", {"diary": diary, "dates": dates})
 
 
 @login_required

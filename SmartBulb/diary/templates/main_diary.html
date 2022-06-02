@@ -86,6 +86,11 @@
   {% for date in dates %}
   <p class="date_published">{{date}}</p>
   {% endfor %}
+
+  {% for snt in diary %}
+  <p>{{ snt.sentiment }}</p>
+  {% endfor %}
+
   <script src="{% static 'js/index.js' %}"></script>
 
   <br>

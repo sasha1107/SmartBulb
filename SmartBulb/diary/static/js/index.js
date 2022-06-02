@@ -38,7 +38,7 @@ const renderCalender = () => {
                       ? 'this'
                       : 'other';
     if (condition == 'this') {
-        dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else {
         dates[i] = `<div class="date"><span class=${condition}>${date}</span></div>`;
     }var 
