@@ -13,9 +13,6 @@
     <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 
     <!-- Load css styles -->
-    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
@@ -147,10 +144,6 @@
               <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="50" height="50" alt=""></a>
               <p style="margin-top: 10px; font-size: 14px; color: #fa5c58;">전구를 켜시겠습니까?</p>
             </div>
-                   <!-- <label class="switch-button">
-                  <input type="checkbox">
-                    <span class="onoff-switch"></span>
-                </label> -->
         {% if bulb_on == 1 %}
           <script type="text/javascript">
 					alert("전구가 켜졌습니다.");
@@ -173,21 +166,9 @@
 	</section>
     <footer>
         <div class="footer">
-        <div class="row">
-            <!-- <div class="col-md-8"> -->
-            <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank' style="color: #fa5c58;">Victory Code</a>
-  </p>
-            <!-- </div> -->
-            <!-- <div class="col-md-4">
-            <ul class="social-icons">
-                <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                <li><a href=""><i class="fa fa-dribbble"></i></a></li>
-                <li><a href=""><i class="fa fa-behance"></i></a></li>
-                <li><a href=""><i class="fa fa-pinterest"></i></a></li>
-            </ul>
-            </div> -->
-        </div>
+          <div class="row">
+              <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank' style="color: #fa5c58;">Victory Code</a></p>
+          </div>
         </div>
     </footer>
     <!-- Footer end  -->
@@ -203,14 +184,6 @@
     <!-- Load custom js for theme -->
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
-    <!-- 토글 -->
-    <!-- <script>
-      var check = $("input[type='checkbox']");
-      check.click(function(){
-        location.href= "{% url 'turn_on_bulbs' diary_id=diary.id %}"
-        bulb_on = 1
-      });
-    </script> -->
   {% endblock %}
   </body>
   </html>

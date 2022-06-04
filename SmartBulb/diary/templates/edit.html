@@ -13,9 +13,6 @@
     <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
 
     <!-- Load css styles -->
-    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" /> -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
@@ -104,7 +101,6 @@
           {{form.as_table}}
         </table>
         <br>
-        <!-- <button class="btn btn-lg btn-primary" type="submit" value="" -->
         <div class="form-group col-md-12">
           <input class="btn btn-lg btn-primary" type="submit" value="수정">
         </div>
@@ -112,36 +108,11 @@
 		</div>
 	</section>
 
-  <!-- <div class="container">
-    <h4>{{diary.pub_date}}</h4>
-    <form method="POST">
-      {% csrf_token %}
-      <table>
-        {{form.as_table}}
-      </table>
-
-      <br>
-      <input class="btn btn dark" type="submit" value="수정">
-    </form>
-  <a href="{% url 'main_diary' %}">돌아가기</a><br>
-</div> -->
 <!-- Footer start -->
   <footer>
     <div class="footer">
       <div class="row">
-        <!-- <div class="col-md-8"> -->
-          <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank' style="color: #fa5c58;">Victory Code</a>
-          </p>
-        <!-- </div> -->
-        <!-- <div class="col-md-4">
-          <ul class="social-icons">
-            <li><a href=""><i class="fa fa-facebook"></i></a></li>
-            <li><a href=""><i class="fa fa-twitter"></i></a></li>
-            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
-            <li><a href=""><i class="fa fa-behance"></i></a></li>
-            <li><a href=""><i class="fa fa-pinterest"></i></a></li>
-          </ul>
-        </div> -->
+          <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank' style="color: #fa5c58;">Victory Code</a></p>
       </div>
     </div>
   </footer>

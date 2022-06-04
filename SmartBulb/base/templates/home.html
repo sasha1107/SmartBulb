@@ -35,9 +35,6 @@
     {% if validity == 0 %}
     <div class="jumbotron home home-fullscreen" id="home" style="height: 714px;">
 		<div class="mask"></div>
-		<!-- <a href="index.html" class="logo">
-			<img src="img/lightbulb.png" width=80px height=80px margin-left=10px alt="마음반짝이">
-		</a> -->
 		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
 		<!-- Offsite navigation -->
 		<nav class="menu">
@@ -50,24 +47,18 @@
 				<li><a data-scroll href="{% url 'login' %}">LOGIN</a></li>
 			</ul>
 		</nav>
-		<!-- <div class="container"> -->
 			<div class="header-info">
-				<!-- <h1>Moderno</h1> -->
 				<div class="rainbow"></div>
 				<p>마음반짝이
 				</p>
 				<a href="{% url 'login' %}" class="btn btn-primary">LOGIN</a>
 			</div>
-		<!-- </div> -->
 	</div>
     <a href="{% url 'login' %}">로그인</a><br>
     <a href="{% url 'signup' %}">회원가입</a><br>
     {% else %}
 	<div class="jumbotron home home-fullscreen" id="home" style="height: 714px;">
 		<div class="mask"></div>
-		<!-- <a href="index.html" class="logo">
-			<img src="img/lightbulb.png" width=80px height=80px margin-left=10px alt="마음반짝이">
-		</a> -->
 		<a href="" class="menu-toggle" id="nav-expander"><i class="fa fa-bars"></i></a>
 		<!-- Offsite navigation -->
 		<nav class="menu">
@@ -80,34 +71,19 @@
 				<li><a data-scroll href="{% url 'logout' %}">LOGOUT</a></li>
 			</ul>
 		</nav>
-		<!-- <div class="container"> -->
 			<div class="header-info">
-				<!-- <h1>Moderno</h1> -->
 				<div class="rainbow"></div>
 				<p><strong>{{username}}</strong>님 안녕하세요!</p>
 				<a href="{% url 'main_diary' %}" class="btn btn-primary">DIARY</a><br><br>
 				<a href="{% url 'logout' %}">LOGOUT</a>
 			</div>
-		<!-- </div> -->
 	</div>
     {% endif %}
 	<!-- Footer start -->
 	<footer>
 		<div class="footer">
 			<div class="row">
-				<!-- <div class="col-md-8"> -->
-					<p>HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank'>Victory Code</a>
-</p>
-				<!-- </div> -->
-				<!-- <div class="col-md-4">
-					<ul class="social-icons">
-						<li><a href=""><i class="fa fa-facebook"></i></a></li>
-						<li><a href=""><i class="fa fa-twitter"></i></a></li>
-						<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-						<li><a href=""><i class="fa fa-behance"></i></a></li>
-						<li><a href=""><i class="fa fa-pinterest"></i></a></li>
-					</ul>
-				</div> -->
+				<p>HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank'>Victory Code</a></p>
 			</div>
 		</div>
 	</footer>
