@@ -19,6 +19,7 @@ import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 filename = os.path.join(BASE_DIR, 'diary', 'sentiment.csv')
+filename2 = os.path.join(BASE_DIR, 'diary', 'encouragement.csv')
 bulb_request = False
 bulb_on = 0
 sentiment_to_light = {
@@ -96,14 +97,19 @@ def save_diary(request, year, month, day):
 @login_required
 def view_diary(request, diary_id):
     global bulb_request, bulb_on
+    data = pd.read_csv(filename2, encoding='cp949')
     diary = Diary.objects.filter(user=request.user.id)
     diary_text = get_object_or_404(diary, pk=diary_id)
 
+    data = data[f"{diary_text.sentiment}"]
+
+    index = random.randint(0, 4)
+
     if bulb_request:
         bulb_request = False
-        return render(request, "diary.html", {'diary': diary_text, 'bulb_on': bulb_on})
+        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index], 'bulb_on': bulb_on})
     else:
-        return render(request, "diary.html", {'diary': diary_text})
+        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index]})
 
 
 @login_required
