@@ -50,10 +50,9 @@ def init_db(request):
 def main_diary(request):
     diary = Diary.objects.filter(user=request.user.id)
     dates = []
-    tmp = ""
 
     for i in range(len(diary)):
-        tmp = str(diary[i].pub_date.isoformat()).split("-")[2]
+        tmp = str(diary[i].pub_date.isoformat())
         # sentiment.append(diary[i].sentiment)
         dates.append(tmp)
 

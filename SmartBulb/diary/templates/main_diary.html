@@ -26,6 +26,14 @@
         display: none;
 	}
 
+    #month_published {
+        display: none;
+	}
+
+    #year_published {
+        display: none;
+	}
+
 	.img_pub {
 	    width: 20px;
 	    height: 20px;
@@ -88,7 +96,7 @@
   {% endfor %}
 
   {% for snt in diary %}
-  <p>{{ snt.sentiment }}</p>
+  <p style="display:none;">{{ snt.sentiment }}</p>
   {% endfor %}
 
   <script src="{% static 'js/index.js' %}"></script>
