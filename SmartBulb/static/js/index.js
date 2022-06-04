@@ -37,7 +37,7 @@ const renderCalender = () => {
     const condition = i >= firstDateIndex && i < lastDateIndex + 1
                       ? 'this'
                       : 'other';
-    if (condition == 'this' && isPublished(date)) {
+    if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear)) {
         dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else if (condition == 'this') {
         dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
@@ -78,15 +78,18 @@ const goToday = () => {
   renderCalender();
 };
 
-function isPublished(date) {
+function isPublished(date, month, year) {
     var dates = document.getElementsByClassName('date_published');
+    var tmp = ""
     var result = false;
-    for (var i = 0; i < dates.length; i++) {
 
-        if (parseInt(dates[i].innerHTML) == parseInt(date)) {
+    for (var i = 0; i < dates.length; i++) {
+        tmp = dates[i].innerHTML.split("-");
+        if (parseInt(tmp[2]) == parseInt(date) && parseInt(tmp[1]) == parseInt(month) && parseInt(tmp[0]) == parseInt(year)) {
             result = true;
         }
     }
+
 
     return result;
 }
