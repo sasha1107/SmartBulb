@@ -107,9 +107,9 @@ def view_diary(request, diary_id):
 
     if bulb_request:
         bulb_request = False
-        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index], 'bulb_on': bulb_on})
+        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index], "sent" : str(diary_text.sentiment), 'bulb_on': bulb_on})
     else:
-        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index]})
+        return render(request, "diary.html", {'diary': diary_text, "encourage": data[index], "sent" : str(diary_text.sentiment)})
 
 
 @login_required

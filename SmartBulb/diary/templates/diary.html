@@ -130,11 +130,17 @@
                 <p>{{diary.text}}</p></br></br>
             </div>
             <div class="contents">
-              <div class="left" style="text-align: right; padding-right:8px; line-height: 110px;">
+              <div class="left" style="text-align: right; padding-right:20px; line-height: 110px;">
+                {% if sent == "부정" %}
                 <img src="{% static '/img/lightbulb_sad.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
+                {% elif sent == "중립" %}
+                <img src="{% static '/img/lightbulb_neutral.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
+                {% elif sent == "긍정" %}
+                <img src="{% static '/img/lightbulb_happy.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
+                {% endif %}
               </div>
-              <div class="right" style="line-height: 110px; padding-left: 8px; text-align: left; align-self: right;">
-                <p style="align-self:right; font-size: 16px;">오늘의 감정은<strong style="color:#fa5c58;">{{diary.sentiment}}</strong>이네요. {{encourage}}</p>
+              <div class="right" style="padding: 20px 50px 10px 10px; text-align: left; align-self: right;">
+                <p style="align-self:right; font-size: 16px;">오늘의 감정은 <strong style="color:#fa5c58;">{{diary.sentiment}}</strong>이네요.<br>{{encourage}}</p>
               </div>
             </div>
             <div class="col-md-12" style="background-color: #efefef; width: fit-content; padding: 12px 20px 3px 20px; margin-bottom: 20px; border-radius: 10px;">
@@ -169,7 +175,7 @@
         <div class="footer">
         <div class="row">
             <!-- <div class="col-md-8"> -->
-            <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://bootstrapthemes.co" style="color: #fa5c58;">Victory Code</a>
+            <p style="font-size: 15px;">HUFS CD <i class="fa fa-love"></i><a href="https://github.com/p-seungri/SmartBulb" target='_blank' style="color: #fa5c58;">Victory Code</a>
   </p>
             <!-- </div> -->
             <!-- <div class="col-md-4">
