@@ -37,8 +37,12 @@ const renderCalender = () => {
     const condition = i >= firstDateIndex && i < lastDateIndex + 1
                       ? 'this'
                       : 'other';
-    if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear)) {
-        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+    if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "긍정") {
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_happy.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+    } else if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "중립") {
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_neutral.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+    } else if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "부정") {
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_sad.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else if (condition == 'this') {
         dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else {
@@ -91,6 +95,20 @@ function isPublished(date, month, year) {
     }
 
 
+    return result;
+}
+
+function getSentiment(date, month, year) {
+    var dates = document.getElementsByClassName('date_published');
+    var tmp = ""
+    var result = "";
+
+    for (var i = 0; i < dates.length; i++) {
+        tmp = dates[i].innerHTML.split("-");
+        if (parseInt(tmp[2]) == parseInt(date) && parseInt(tmp[1]) == parseInt(month) && parseInt(tmp[0]) == parseInt(year)) {
+            result = tmp[3];
+        }
+    }
     return result;
 }
 
