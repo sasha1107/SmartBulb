@@ -54,6 +54,7 @@ def main_diary(request):
 
     for i in range(len(diary)):
         tmp = str(diary[i].pub_date.isoformat())
+        tmp += "-" + str(diary[i].sentiment)
         # sentiment.append(diary[i].sentiment)
         dates.append(tmp)
 
