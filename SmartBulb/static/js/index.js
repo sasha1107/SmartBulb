@@ -38,11 +38,11 @@ const renderCalender = () => {
                       ? 'this'
                       : 'other';
     if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "긍정") {
-        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_happy.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked_happy.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "중립") {
-        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_neutral.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked_neutral.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else if (condition == 'this' && isPublished(date, viewMonth + 1, viewYear) && getSentiment(date, viewMonth + 1, viewYear) == "부정") {
-        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/lightbulb_sad.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
+        dates[i] = `<div class="date"><img class="img_pub" src="../static/img/checked_sad.png"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else if (condition == 'this') {
         dates[i] = `<div class="date"><span class=${condition}><a href="save_diary/${viewYear}/${viewMonth + 1}/${date}">${date}</a></span></div>`;
     } else {
