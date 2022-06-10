@@ -9,11 +9,8 @@ from .form import DiaryPost
 import pandas as pd
 from yeelight import discover_bulbs, Bulb
 import random
-# from soynlp.normalizer import *
-# from hanspell import spell_checker
 import os
-import sys
-
+from .tree import *
 
 # Create your views here.
 
@@ -30,7 +27,7 @@ sentiment_to_light = {
 
 
 def analyze_sentiment(sentence):
-    sentiment = Sentiment.objects.get(sentiment="부정")
+    sentiment = Sentiment.objects.get(sentiment=get_sentiment(sentence))
 
     return sentiment
 
