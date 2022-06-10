@@ -11,3 +11,6 @@ django-debug-toolbar
 pandas
 numpy
 yeelight
+jpype1
+konlpy
+customized_konlpy
