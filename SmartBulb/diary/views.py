@@ -28,7 +28,7 @@ sentiment_to_light = {
 
 def analyze_sentiment(sentence):
     sentiment = Sentiment.objects.get(sentiment=get_sentiment(sentence))
-
+    new_insert(sentence)
     return sentiment
 
 
@@ -155,10 +155,12 @@ def statistics(request, year, month):
     else:
 
         for diary in diaries:
-            try:
-                sentiment_dict[f"{diary.sentiment}"] += 1
-            except Exception as err:
-                sentiment_dict[f"{diary.sentiment}"] = 1
+            tmp = str(diary.pub_date.isoformat()).split('-')
+            if int(tmp[0]) == year and int(tmp[1]) == month:
+                try:
+                    sentiment_dict[f"{diary.sentiment}"] += 1
+                except Exception as err:
+                    sentiment_dict[f"{diary.sentiment}"] = 1
 
         for k, v in sentiment_dict.items():
             if max_value < v:
