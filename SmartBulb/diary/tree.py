@@ -230,9 +230,9 @@ def get_sentiment(new_sent):
     except ZeroDivisionError:
         return
 
-    if -2 <= avr < -0.5:
+    if -2 <= avr < -0.2:
         return '부정'
-    elif 2 >= avr > 0.5:
+    elif 2 >= avr > 0.2:
         return '긍정'
     else:
         return '중립'
