@@ -233,9 +233,9 @@ def get_sentiment(new_sent):
     if -2 <= avr < -0.5:
         return '부정'
     elif 2 >= avr > 0.5:
-        return '중립'
-    else:
         return '긍정'
+    else:
+        return '중립'
 
 
 load_sent_dict()
