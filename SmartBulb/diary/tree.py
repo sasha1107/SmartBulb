@@ -238,6 +238,24 @@ def get_sentiment(new_sent):
         return '중립'
 
 
+def new_insert(new_sent):
+    sent_words = tokenize(text_preprocess(new_sent))
+    new_li =[]
+    sum = 0
+    for i in range(len(sent_words)):
+        pos_or_neg = posneg_decision(sent_words[i])
+        if pos_or_neg == 'positive':
+            new_node = bfs(pos_tree, sent_words[i])
+            sum += new_node[1]
+            new_li.append(new_node)
+            pos_tree.insert(new_node)
+        else:
+            new_node = bfs(neg_tree, sent_words[i])
+            sum += new_node[1]
+            new_li.append(new_node)
+            neg_tree.insert(new_node)
+
+
 load_sent_dict()
 set_tree()
 set_sent_list()
