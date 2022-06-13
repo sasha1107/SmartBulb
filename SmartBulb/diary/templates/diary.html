@@ -131,13 +131,6 @@
               <div class="left" style="text-align: right; padding-right:40px; ">
                 <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="50" height="50" alt=""></a>
                 <p style="margin-top: 10px; font-size: 14px; font-weight: 700;">전구 ON</p>
-                <!-- {% if sent == "부정" %}
-                <img src="{% static '/img/lightbulb_sad.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
-                {% elif sent == "중립" %}
-                <img src="{% static '/img/lightbulb_neutral.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
-                {% elif sent == "긍정" %}
-                <img src="{% static '/img/lightbulb_happy.png' %}" text-align=right width=80px height=80px style="margin-bottom:10px;"></a></br>
-                {% endif %} -->
               </div>
               <div class="right" style="padding: 5px 200px 10px 0px; text-align: left;">
                 {% if sent == "부정" %}
@@ -147,13 +140,8 @@
                 {% elif sent == "긍정" %}
                 <p style="align-self:right; font-size: 16px;">오늘의 감정은 <strong style="color:#3EACFA;">{{diary.sentiment}} </strong><img src="{% static '/img/checked_happy.png'%}" width=24px style="padding-bottom: 2px;"> 이네요.<br>{{encourage}}</p>
                 {% endif %}
-                <!-- <p style="align-self:right; font-size: 16px;">오늘의 감정은 <strong style="color:#fa5c58;">{{diary.sentiment}} </strong><img src="{% static '/img/checked_happy.png'%}" width=24px style="padding-bottom: 2px;"> 이네요.<br>{{encourage}}</p> -->
-              </div>
+                </div>
             </div>
-            <!-- <div class="col-md-12" style="background-color: #efefef; width: fit-content; padding: 12px 20px 3px 20px; margin-bottom: 20px; border-radius: 10px;">
-              <a href="{% url 'turn_on_bulbs' diary_id=diary.id %}"><img src="{% static '/img/switch_off.png'%}" onmouseover="this.src='{% static '/img/switch_on.png'%}'" onmouseout="this.src='{% static '/img/switch_off.png'%}'" width="50" height="50" alt=""></a>
-              <p style="margin-top: 10px; font-size: 14px; color: #fa5c58;">전구를 켜시겠습니까?</p>
-            </div> -->
         {% if bulb_on == 1 %}
           <script type="text/javascript">
 					alert("전구가 켜졌습니다.");
