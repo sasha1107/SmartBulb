@@ -3,6 +3,19 @@
 한국외대 AI융합전공(SW&AI) 서울 종합설계 B2팀 저장소
 
 - - -
+## 구현 내용 이미지
+
+|스플래시 페이지|회원가입 페이지|
+|:-:|:-:|
+|<img width="390" alt="image" src="./preview/splash.gif">|<img width="390" alt="image" src="./preview/register.gif">|
+|일기 작성|일기 분석 결과|
+|<img width="390" alt="image" src="./preview/new_diary.gif">|<img width="390" alt="image" src="./preview/result.gif">|
+|전구 정보 추가|전구 켜기|
+|<img width="390" alt="image" src="./preview/add_bulb.gif">|<img width="390" alt="image" src="./preview/bulb_on.gif">|
+|감정 통계|
+|<img width="390" alt="image" src="./preview/statistic.gif">|
+
+- - -
 ## 프로젝트 시작할 때
 ### 가상환경 설치
 requirements.txt 파일이 있는 상위에서
