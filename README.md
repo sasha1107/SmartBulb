@@ -3,6 +3,17 @@
 한국외대 AI융합전공(SW&AI) 서울 종합설계 B2팀 저장소
 
 - - -
+## 팀원 소개
+구분 |  담당자
+----- | ----- 
+프론트엔드  | 정수현
+백엔드 | 박승리
+모델 개발 | 한지은, 오석진
+
+<br>
+
+- - -
+
 ## 구현 내용 이미지
 
 |스플래시 페이지|회원가입 페이지|
@@ -14,6 +25,7 @@
 |<img width="390" alt="image" src="./preview/add_bulb.gif">|<img width="390" alt="image" src="./preview/bulb_on.gif">|
 |감정 통계|
 |<img width="390" alt="image" src="./preview/statistic.gif">|
+<br>
 
 - - -
 ## 프로젝트 시작할 때
